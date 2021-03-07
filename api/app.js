@@ -3,6 +3,7 @@
 // load modules
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const routes = require('./routes');
 const { notFound, globalError } = require('./errors');
 const { sequelize } = require('./models');
@@ -13,6 +14,8 @@ const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'tr
 // create the Express app
 const app = express();
 
+// Setup cors support 
+app.use(cors());
 // Setup request body JSON parsing.
 app.use(express.json());
 
