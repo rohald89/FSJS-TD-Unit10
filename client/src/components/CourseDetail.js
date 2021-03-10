@@ -50,7 +50,7 @@ function CourseDetail(props) {
                             <ul className="course--detail--list">
                                 { course.materialsNeeded 
                                     ? course.materialsNeeded.split('*').slice(1).map(material => (
-                                    <li>{material}</li>
+                                    <li key={material}>{material}</li>
                                     ))
                                     : ''
                                 }
