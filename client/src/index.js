@@ -4,10 +4,12 @@ import ReactDOM from 'react-dom';
 import './styles/reset.css';
 import './styles/global.css';
 
+import { Provider } from './Context';
 import App from './App';
 
 ReactDOM.render(
-    <App />,
-  document.getElementById('root')
-);
+  <Provider>
+    <App />
+  </Provider>,
+  document.getElementById('root'));
 
