@@ -8,6 +8,7 @@ const notFound = ((req, res, next) => {
   
 // Global error handler
 const globalError = ((err, req, res, next) => {
+    console.log(err);
     res.status(err.status || 500).json({ error: err });
 });
 

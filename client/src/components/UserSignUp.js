@@ -4,7 +4,8 @@ import Form from './Form';
 
 export default class UserSignUp extends Component {
   state = {
-    name: '',
+    firstName: '',
+    lastName: '',
     emailAddress: '',
     password: '',
     confirmPassword: '',
@@ -13,7 +14,8 @@ export default class UserSignUp extends Component {
 
   render() {
     const {
-      name,
+      firstName,
+      lastName,
       emailAddress,
       password,
       confirmPassword,
@@ -30,14 +32,22 @@ export default class UserSignUp extends Component {
             submitButtonText="Sign Up"
             elements={() => (
               <React.Fragment>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">First Name</label>
                 <input 
-                  id="name" 
-                  name="name" 
+                  id="firstName" 
+                  name="firstName" 
                   type="text"
-                  value={name} 
+                  value={firstName} 
                   onChange={this.change} 
-                  placeholder="Name" />
+                  placeholder="First Name" />
+                <label htmlFor="name">Last Name</label>
+                <input 
+                  id="lastName" 
+                  name="lastName" 
+                  type="text"
+                  value={lastName} 
+                  onChange={this.change} 
+                  placeholder="Last Name" />
                 <label htmlFor="emailAddress">Email Address</label>
                 <input 
                   id="emailAddress" 
@@ -85,9 +95,9 @@ export default class UserSignUp extends Component {
   submit = () => {
     const {context } = this.props;
 
-    const { name, emailAddress, password } = this.state;
+    const { firstName, lastName, emailAddress, password } = this.state;
 
-    const user = {name, emailAddress, password};
+    const user = {firstName, lastName, emailAddress, password};
     context.data.createUser(user)
     .then( errors => {
       if(errors.length) {
