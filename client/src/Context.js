@@ -21,7 +21,8 @@ export class Provider extends Component {
       data: this.data,
       actions: {
         signIn: this.signIn,
-        signOut: this.signOut
+        signOut: this.signOut,
+        handleChange: this.handleChange
       }
     }
     return (
@@ -53,6 +54,10 @@ export class Provider extends Component {
       }
     });
     Cookies.remove('authenticatedUser');
+  }
+
+  handleChange = () => {
+    console.log('test')
   }
 }
 

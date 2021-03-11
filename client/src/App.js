@@ -16,6 +16,7 @@ import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
 
 const HeaderWithContext = withContext(Header);
+const UpdateCourseWithContext = withContext(UpdateCourse);
 const AuthWitContext = withContext(Authenticated);
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
@@ -30,7 +31,7 @@ function App() {
           <Route exact path='/' component={Courses} />
           <Route exact path='/courses/create' component={CreateCourse} />
           <Route exact path='/courses/:id' component={CourseDetail} />
-          <Route exact path='/courses/:id/update' component={UpdateCourse} />
+          <Route exact path='/courses/:id/update' component={UpdateCourseWithContext} />
           <PrivateRoute path="/authenticated" component={AuthWitContext} />
           <PrivateRoute path="/settings" component={AuthWitContext} />
           <Route path="/signin" component={UserSignInWithContext} />
