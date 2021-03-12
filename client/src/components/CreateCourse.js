@@ -1,6 +1,7 @@
 import React from 'react';
 
-function CreateCourse() {
+function CreateCourse(props) {
+    const {context} = props;
     return (
         <div className="wrap">
             <h2>Create Course</h2>
