@@ -1,11 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 function UpdateCourse(props) {
     const { id } = props.match.params;
     const { context } = props;
     const { emailAddress, password } = context.authenticatedUser;
+    const history = useHistory();
     const [course, setCourse] = useState({
         id: '',
         title: '',
@@ -40,10 +41,10 @@ function UpdateCourse(props) {
         e.preventDefault();
         context.data.updateCourse(course, emailAddress, password)
           .then(errors => {
-              if(errors.length > 0) {
-                  console.log(errors)
+              if(errors) {
+                  return errors;
               } else {
-                  console.log('great success')
+                  history.push(`/courses/${id}`)
               }
           })
           .catch(err => console.log(err));
