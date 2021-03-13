@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Form from './Form';
 
 function CreateCourse(props) {
@@ -30,15 +30,11 @@ function CreateCourse(props) {
         .then(data => setErrors(data));
     };
 
-    const cancel = () => {
-        history.push('/');
-    }
-
     return (
         <div className="wrap">
             <h2>Create Course</h2>
             <Form
-                cancel={cancel}
+                cancel={() => history.push('/')}
                 errors={errors}
                 submit={handleCreate}
                 submitButtonText="Create Course"

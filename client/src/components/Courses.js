@@ -10,9 +10,7 @@ function Courses() {
         .then(res => res.json())
         .then(data => setCourses(data.courses))
         .catch(err => console.log(err))
-        .finally(courses.map(course => console.log(course.title)));
-        
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <main>

@@ -43,7 +43,7 @@ export default class Data {
     }
     else if (response.status === 400) {
       return response.json().then(data => {
-        return data.errors;
+        return data.error.message;
       });
     }
     else {
@@ -87,8 +87,9 @@ export default class Data {
       return response.json().then(data => {
         return data.error.message;
       });
-    }
-    else {
+    } else if (response.status === 500) {
+      this.props.history.push('/error');
+    } else {
       throw new Error();
     }
   }

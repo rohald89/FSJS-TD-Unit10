@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Form from './Form';
 
 function UpdateCourse(props) {
@@ -33,8 +33,11 @@ function UpdateCourse(props) {
                 setCourse(data);
             }
         })
-        .catch(err => console.log(err))
-    }, [])
+        .catch(err => {
+            console.log(err);
+            history.push('/error');
+        });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -68,20 +71,20 @@ function UpdateCourse(props) {
                     <div className="main--flex">
                         <div>
                             <label htmlFor="title">Course Title</label>
-                            <input id="title" name="title" type="text" value={course.title} onChange={handleChange} />
+                            <input id="title" name="title" type="text" value={course.title || ''} onChange={handleChange} />
 
                             <label htmlFor="courseAuthor">Course Author</label>
-                            <input id="courseAuthor" name="courseAuthor" type="text" defaultValue={`${firstName} ${lastName}`} disabled />
+                            <input id="courseAuthor" name="courseAuthor" type="text" defaultValue={`${firstName} ${lastName}` || ''} disabled />
 
                             <label htmlFor="description">Course Description</label>
-                            <textarea id="description" name="description" value={course.description} onChange={handleChange} />
+                            <textarea id="description" name="description" value={course.description || ''} onChange={handleChange} />
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
-                            <input id="estimatedTime" name="estimatedTime" type="text" value={course.estimatedTime} onChange={handleChange} />
+                            <input id="estimatedTime" name="estimatedTime" type="text" value={course.estimatedTime || ''} onChange={handleChange} />
 
                             <label htmlFor="materialsNeeded">Materials Needed</label>
-                            <textarea id="materialsNeeded" name="materialsNeeded" value={course.materialsNeeded} onChange={handleChange} />
+                            <textarea id="materialsNeeded" name="materialsNeeded" value={course.materialsNeeded || ''} onChange={handleChange} />
                         </div>
                     </div>
                 )} 
