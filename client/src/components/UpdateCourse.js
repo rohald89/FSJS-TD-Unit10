@@ -1,11 +1,10 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 function UpdateCourse(props) {
     const { id } = props.match.params;
     const { context } = props;
-    const { emailAddress, password } = context.authenticatedUser;
+    const { id: authId, emailAddress, password } = context.authenticatedUser;
     const history = useHistory();
     const [course, setCourse] = useState({
         id: '',
@@ -22,10 +21,17 @@ function UpdateCourse(props) {
     });
 
     useEffect(() => {
-        console.log('useEffect called!', id)
-        axios.get(`http://localhost:5000/api/courses/${id}`)
-        .then(data => setCourse(data.data.course))
-        .then(console.log(course))
+        context.data.getCourse(id)
+        .then(data => {
+            console.log(data);
+            if (!data){
+                history.push('/notfound');
+            } else if (data.user.id !== authId){
+                history.push('/forbidden');
+            } else {
+                setCourse(data);
+            }
+        })
         .catch(err => console.log(err))
     }, [])
 

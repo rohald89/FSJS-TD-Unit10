@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import { Link, useHistory } from 'react-router-dom';
 
 import ActionBar from './ActionsBar';
 
 function CourseDetail(props) {
+    const {id} = props.match.params;
+    const { context } = props;    
+    const history = useHistory();
     const [course, setCourse] = useState({
         id: '',
         title: '',
@@ -19,11 +22,18 @@ function CourseDetail(props) {
     });
 
     useEffect(() => {
-        console.log('useEffect called!', props.match.url)
-        axios.get(`http://localhost:5000/api/${props.match.url}`)
-        .then(data => setCourse(data.data.course))
-        .then(console.log(course))
-        .catch(err => console.log(err))
+        context.data.getCourse(id)
+        .then(data => {
+            if(data === null) {
+                history.push('/notfound');
+            } else {
+                setCourse(data)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            history.push('/error');
+        })
     }, [])
 
 
