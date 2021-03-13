@@ -1,39 +1,69 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import Form from './Form';
 
 function CreateCourse(props) {
-    const {context} = props;
+    const { context } = props;
+    const history = useHistory();
+    const { id, firstName, lastName, emailAddress, password } = context.authenticatedUser; 
+
+    const [course, setCourse] = useState({
+        title: '',
+        description: '',
+        estimatedTime: '',
+        materialsNeeded: '',
+        userId: id    
+    });
+    const [errors, setErrors] = useState([]);
+
+    const handleChange = e => {
+        const { name, value } = e.target;
+        setCourse(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleCreate = () => {
+        console.log(course);
+        context.data.createCourse(course, emailAddress, password)
+        .then(data => setErrors(data));
+    };
+
+    const cancel = () => {
+        history.push('/');
+    }
+
     return (
         <div className="wrap">
             <h2>Create Course</h2>
-            <div className="validation--errors">
-                <h3>Validation Errors</h3>
-                <ul>
-                    <li>Please provide a value for "Title"</li>
-                    <li>Please provide a value for "Description"</li>
-                </ul>
-            </div>
-            <form>
-                <div className="main--flex">
-                    <div>
-                        <label for="courseTitle">Course Title</label>
-                        <input id="courseTitle" name="courseTitle" type="text" value="" />
+            <Form
+                cancel={cancel}
+                errors={errors}
+                submit={handleCreate}
+                submitButtonText="Create Course"
+                elements={() => (
+                    <div className="main--flex">
+                        <div>
+                            <label htmlFor="title">Course Title</label>
+                            <input id="title" name="title" type="text" onChange={handleChange} />
 
-                        <label for="courseAuthor">Course Author</label>
-                        <input id="courseAuthor" name="courseAuthor" type="text" value="Joe Smith" />
+                            <label htmlFor="courseAuthor">Course Author</label>
+                            <input id="courseAuthor" name="courseAuthor" type="text" defaultValue={`${firstName} ${lastName}`} disabled />
 
-                        <label for="courseDescription">Course Description</label>
-                        <textarea id="courseDescription" name="courseDescription" />
+                            <label htmlFor="description">Course Description</label>
+                            <textarea id="description" name="description" onChange={handleChange} />
+                        </div>
+                        <div>
+                            <label htmlFor="estimatedTime">Estimated Time</label>
+                            <input id="estimatedTime" name="estimatedTime" type="text" onChange={handleChange} />
+
+                            <label htmlFor="materialsNeeded">Materials Needed</label>
+                            <textarea id="materialsNeeded" name="materialsNeeded" onChange={handleChange} />
+                        </div>
                     </div>
-                    <div>
-                        <label for="estimatedTime">Estimated Time</label>
-                        <input id="estimatedTime" name="estimatedTime" type="text" value="" />
-
-                        <label for="materialsNeeded">Materials Needed</label>
-                        <textarea id="materialsNeeded" name="materialsNeeded" />
-                    </div>
-                </div>
-                <button className="button" type="submit">Create Course</button><button className="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button>
-            </form>
+                )} 
+            />
         </div>
     )
 }

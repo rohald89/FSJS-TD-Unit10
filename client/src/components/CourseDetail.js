@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import withContext from '../Context';
 import ActionBar from './ActionsBar';
+
+const ActionBarWithContext = withContext(ActionBar);
 
 function CourseDetail(props) {
     const {id} = props.match.params;
-    const { context } = props;    
+    const { context } = props;
+    const { id: authId } = context.authenticatedUser;
     const history = useHistory();
     const [course, setCourse] = useState({
         id: '',
@@ -27,7 +31,8 @@ function CourseDetail(props) {
             if(data === null) {
                 history.push('/notfound');
             } else {
-                setCourse(data)
+                setCourse(data);
+                console.log(data);
             }
         })
         .catch(err => {
@@ -39,7 +44,11 @@ function CourseDetail(props) {
 
     return (
         <>
-            <ActionBar id={course.id}/>
+            {
+                authId === course.user.id ? 
+                <ActionBarWithContext id={course.id} />
+                : ''
+            }
             
             <div className="wrap">
                 <h2>Course Detail</h2>

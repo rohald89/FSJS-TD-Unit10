@@ -70,7 +70,7 @@ export default class Data {
     }
     else if (response.status === 400) {
       return response.json().then(data => {
-        return data.errors;
+        return data.error.message;
       });
     }
     else {
@@ -82,11 +82,9 @@ export default class Data {
     const path = `/courses/${course.id}`;
     const response = await this.api(path, 'PUT', course, true, { emailAddress, password });
     if (response.status === 204) {
-      return;
-    }
-    else if (response.status === 400) {
+      return [];
+    } else if (response.status === 400) {
       return response.json().then(data => {
-        // console.log(data.error.message);
         return data.error.message;
       });
     }
@@ -95,7 +93,8 @@ export default class Data {
     }
   }
 
-  async deleteCourse(course, emailAddress, password) {
-
+  async deleteCourse(id, emailAddress, password) {
+    const path = `/courses/${id}`;
+    await this.api(path, 'DELETE', null, true, { emailAddress, password });
   }
 }
