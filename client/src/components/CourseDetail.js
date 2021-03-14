@@ -8,11 +8,11 @@ import ActionBar from './ActionsBar';
 const ActionBarWithContext = withContext(ActionBar);
 
 function CourseDetail(props) {
-    const {id} = props.match.params;
+    const { id } = props.match.params;
     const { context } = props;
     const user = context.authenticatedUser;
     const history = useHistory();
-    const [course, setCourse] = useState({
+    const [ course, setCourse ] = useState({
         id: '',
         title: '',
         description: '',
@@ -26,7 +26,7 @@ function CourseDetail(props) {
         }
     });
 
-    useEffect(() => {
+    useEffect( () => {
         context.data.getCourse(id)
         .then(data => {
             if(data === null) {
@@ -68,14 +68,6 @@ function CourseDetail(props) {
 
                             <h3 className="course--detail--title">Materials Needed</h3>
                             <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
-                            {/* <ul className="course--detail--list">
-                                { course.materialsNeeded 
-                                    ? course.materialsNeeded.split('*').slice(1).map(material => (
-                                    <li key={material}>{material}</li>
-                                    ))
-                                    : ''
-                                }
-                            </ul> */}
                         </div>
                     </div>
                 </form>
