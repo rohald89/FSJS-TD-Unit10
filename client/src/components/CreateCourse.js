@@ -25,9 +25,14 @@ function CreateCourse(props) {
     };
 
     const handleCreate = () => {
-        console.log(course);
         context.data.createCourse(course, emailAddress, password)
-        .then(data => setErrors(data));
+        .then( data => {
+            if(data.length){
+                setErrors(data);
+            } else {
+                history.push('/');
+            }
+        });
     };
 
     return (

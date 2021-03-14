@@ -1,16 +1,19 @@
 import React from 'react';
-import {Link, useHistory } from 'react-router-dom';
+import {Link } from 'react-router-dom';
+import {createBrowserHistory} from 'history';
 
 function ActionsBar(props) {
-    const history = useHistory();
+    // force rerender of the courses after deleting one
+    const history = createBrowserHistory({forceRefresh:true})
     const {id, context} = props;
     const { emailAddress, password } = context.authenticatedUser;
 
     const handleDelete = (e) => {
         e.preventDefault();
         console.log('delete Button Clicked!');
-        context.data.deleteCourse(id, emailAddress, password);
+        context.data.deleteCourse(id, emailAddress, password)
         history.push('/');
+        
     };
 
     return (

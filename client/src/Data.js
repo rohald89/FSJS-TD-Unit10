@@ -51,6 +51,14 @@ export default class Data {
     }
   }
 
+  async getCourses() {
+    const path = `/courses/`
+    const response = await this.api(path, 'GET');
+    if(response.status === 200) {
+      return response.json();
+    }
+  }
+
   async getCourse(courseId){
     const path = `/courses/${courseId}`
     const response = await this.api(path, 'GET');
@@ -96,6 +104,9 @@ export default class Data {
 
   async deleteCourse(id, emailAddress, password) {
     const path = `/courses/${id}`;
-    await this.api(path, 'DELETE', null, true, { emailAddress, password });
+    const response = await this.api(path, 'DELETE', null, true, { emailAddress, password });
+    if (response.status === 204 ) {
+      return;
+    }
   }
 }

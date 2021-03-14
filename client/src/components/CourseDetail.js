@@ -33,7 +33,6 @@ function CourseDetail(props) {
                 history.push('/notfound');
             } else {
                 setCourse(data);
-                console.log(data);
             }
         })
         .catch(err => {
