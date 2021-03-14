@@ -46,7 +46,7 @@ function Courses(props) {
 
     return (
         <main>
-            <input type="text" list="course-titles" onChange={filterCourses}/>
+            <input type="text" className="search-input" list="course-titles" onChange={filterCourses}/>
             <datalist id="course-titles"> 
             {/* test to see if theres less than 5 filtered courses to generate the options
                 otherwise I found the list of names got to long */}
@@ -65,6 +65,7 @@ function Courses(props) {
                         <Link className="course--module course--link" to={`/courses/${course.id}`} key={course.id} >
                             <h2 className="course--label">Course</h2>
                             <h3 className="course--title">{course.title}</h3>
+                            <p className="course--description">{course.description}</p>
                         </Link> 
                 ))}
                 <Link className="course--module course--add--module" to="/courses/create">
