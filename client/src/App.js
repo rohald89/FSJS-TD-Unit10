@@ -16,6 +16,7 @@ import NotFound from './components/NotFound';
 import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
 
+// set the components up as Consumers for Context
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
 const CreateCourseWithContext = withContext(CreateCourse);

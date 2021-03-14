@@ -22,6 +22,9 @@ function UpdateCourse(props) {
         }        
     });
 
+    // make a get request to get the course based on the id parameter
+    // if the user is not the owner of the course redirect to forbidden
+    // if there's no course for this id parameter redirect to notfound
     useEffect(() => {
         context.data.getCourse(id)
         .then(data => {
@@ -39,6 +42,7 @@ function UpdateCourse(props) {
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    // update state upon input field value changes
     const handleChange = e => {
         const { name, value } = e.target;
         setCourse(prevState => ({
@@ -47,6 +51,8 @@ function UpdateCourse(props) {
         }));
     };
     
+    // make a put request to save the changes made to the course
+    // display errors of there are any and after saving forward the user to the courseDetail page
     const handleUpdate = () => {
         context.data.updateCourse(course, emailAddress, password)
           .then(data => {

@@ -26,6 +26,7 @@ function CourseDetail(props) {
         }
     });
 
+    // fetch the course based on the id parameter and save it to state. when no course with that id is found redirect to notfound component
     useEffect( () => {
         context.data.getCourse(id)
         .then(data => {
@@ -45,6 +46,8 @@ function CourseDetail(props) {
     return (
         <>
             {
+                // make sure authenticated user is the owner of this course
+                // if it is show the action bar
                 user && user.id === course.user.id ? 
                 <ActionBarWithContext id={course.id} />
                 : ''

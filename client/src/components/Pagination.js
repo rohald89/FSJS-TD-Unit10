@@ -1,5 +1,7 @@
 import React from 'react';
 
+// passed the total amount of courses and amount of courses per page to calculate howmany pages are required
+// those numbers get stored in an array to then iterate over it to render out the page buttons
 function Pagination({ perPage, totalCourses, paginate, perPageChange }) {
     const pageNumbers = [];
 

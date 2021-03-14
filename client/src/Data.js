@@ -1,6 +1,7 @@
 import config from './config';
 
 export default class Data {
+  // method to generate a request to the api
   api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
     const url = config.apiBaseUrl + path;
   
@@ -23,6 +24,7 @@ export default class Data {
     return fetch(url, options);
   }
 
+  // get the data of the user currently logged in
   async getUser(emailAddress, password) {
     const response = await this.api(`/users`, 'GET', null, true, { emailAddress, password });
     if (response.status === 200) {
@@ -36,6 +38,7 @@ export default class Data {
     }
   }
   
+  // create a new user
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
@@ -51,6 +54,7 @@ export default class Data {
     }
   }
 
+  // get all the courses for the homepage
   async getCourses() {
     const path = `/courses/`
     const response = await this.api(path, 'GET');
@@ -59,6 +63,7 @@ export default class Data {
     }
   }
 
+  // get a single course based on its id for the courseDetail component
   async getCourse(courseId){
     const path = `/courses/${courseId}`
     const response = await this.api(path, 'GET');
@@ -69,11 +74,11 @@ export default class Data {
     }
   }
 
+  // create a new course
   async createCourse(course, emailAddress, password) {
     const path = `/courses`;
     const response = await this.api(path, 'POST', course, true, { emailAddress, password });
     if (response.status === 201) {
-      console.log('COURSE CREATED')
       return [];
     }
     else if (response.status === 400) {
@@ -86,6 +91,7 @@ export default class Data {
     }
   }
 
+  // make changes to an existing course
   async updateCourse(course, emailAddress, password) {
     const path = `/courses/${course.id}`;
     const response = await this.api(path, 'PUT', course, true, { emailAddress, password });
@@ -102,6 +108,7 @@ export default class Data {
     }
   }
 
+  // delete a course
   async deleteCourse(id, emailAddress, password) {
     const path = `/courses/${id}`;
     const response = await this.api(path, 'DELETE', null, true, { emailAddress, password });

@@ -5,38 +5,40 @@ import Pagination from './Pagination';
 
 function Courses(props) {
     const [courses, setCourses] = useState([]);
-    const [filteredCourses, setFilteredCourses] = useState(null);
+    const [filteredCourses, setFilteredCourses] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(localStorage.getItem('perPage') || 3);
     const { context } = props;
 
+    // get all courses and store them in the courses and filteredCourses variables
     useEffect(() => {
         setLoading(true);
         context.data.getCourses()
-            .then(data => setCourses(data.courses))
+            .then(data => {
+                setCourses(data.courses);
+                setFilteredCourses(data.courses);
+            })
             .catch(err => console.log(err));
         setLoading(false);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    // add pagination for the courses page
     const lastIndex = currentPage * perPage;
     const firstIndex = lastIndex - perPage;
-    const currentCourseRange = filteredCourses !== null ? filteredCourses.slice(firstIndex, lastIndex) :courses.slice(firstIndex, lastIndex);
+    const currentCourseRange = filteredCourses.slice(firstIndex, lastIndex);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
     const perPageChange = e => {
+        // store preferred amount of courses per page in localStorage
         localStorage.setItem('perPage', e.target.value);
         setPerPage(e.target.value)
     };
 
+    // filter courses based on search query
     const filterCourses = (e) => {
         const filtered = courses.filter(course => {
-            console.log(e.target.value);
-            if(e.target.value === ''){
-                return null;
-            } else {
-                return course.title.toLowerCase().includes(e.target.value.toLowerCase());
-            }
+            return course.title.toLowerCase().includes(e.target.value.toLowerCase());
         });
         setFilteredCourses(filtered);
     };

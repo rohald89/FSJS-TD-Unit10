@@ -16,6 +16,7 @@ function CreateCourse(props) {
     });
     const [errors, setErrors] = useState([]);
 
+    // update state when any of the input values change
     const handleChange = e => {
         const { name, value } = e.target;
         setCourse(prevState => ({
@@ -24,6 +25,7 @@ function CreateCourse(props) {
         }));
     };
 
+    // create a put request to create the course stored in `course` variable
     const handleCreate = () => {
         context.data.createCourse(course, emailAddress, password)
         .then( data => {

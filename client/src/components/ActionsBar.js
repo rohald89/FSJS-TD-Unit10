@@ -5,7 +5,7 @@ import {createBrowserHistory} from 'history';
 function ActionsBar(props) {
     // force rerender of the courses after deleting one
     const history = createBrowserHistory({forceRefresh:true})
-    const {id, context} = props;
+    const { id, context } = props;
     const { emailAddress, password } = context.authenticatedUser;
 
     const handleDelete = (e) => {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Consumer } from './Context';
 
+// check if the user is currently logged in otherwise redirect to the signin page
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Consumer>
