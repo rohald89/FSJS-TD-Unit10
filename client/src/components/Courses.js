@@ -32,7 +32,8 @@ function Courses(props) {
     const perPageChange = e => {
         // store preferred amount of courses per page in localStorage
         localStorage.setItem('perPage', e.target.value);
-        setPerPage(e.target.value)
+        setPerPage(e.target.value);
+        setCurrentPage(1);
     };
 
     // filter courses based on search query
@@ -76,6 +77,7 @@ function Courses(props) {
                 
             </div>
             <Pagination 
+                activePage={currentPage}
                 perPage={perPage}
                 totalCourses={courses.length}
                 paginate={paginate}
