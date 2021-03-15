@@ -38,7 +38,7 @@ function CreateCourse(props) {
     };
 
     return (
-        <div className="wrap">
+        <div className="wrap create--course">
             <h2>Create Course</h2>
             <Form
                 cancel={() => history.push('/')}

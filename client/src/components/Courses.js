@@ -80,7 +80,7 @@ function Courses(props) {
             <Pagination 
                 activePage={currentPage}
                 perPage={perPage}
-                totalCourses={courses.length}
+                totalCourses={filteredCourses.length}
                 paginate={paginate}
                 perPageChange={perPageChange}
             /> 

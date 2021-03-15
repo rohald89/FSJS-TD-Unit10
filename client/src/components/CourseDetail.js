@@ -53,7 +53,7 @@ function CourseDetail(props) {
                 : ''
             }
             
-            <div className="wrap">
+            <div className="wrap course--detail">
                 <h2>Course Detail</h2>
                 <form>
                     <div className="main--flex">
