@@ -66,7 +66,7 @@ function UpdateCourse(props) {
     }
 
     return (
-        <div className="wrap">
+        <div className="wrap course--update">
             <h2>Update Course</h2>
             <Form
                 cancel={() => history.push('/')}

@@ -46,7 +46,7 @@ function Courses(props) {
 
     return (
         <main>
-            <input type="text" className="search-input" list="course-titles" onChange={filterCourses}/>
+            <input type="text" className="search-input" list="course-titles" onChange={filterCourses} placeholder='Search course ...'/>
             <datalist id="course-titles"> 
             {/* test to see if theres less than 5 filtered courses to generate the options
                 otherwise I found the list of names got to long */}
