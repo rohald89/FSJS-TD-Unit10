@@ -41,6 +41,7 @@ function Courses(props) {
         const filtered = courses.filter(course => {
             return course.title.toLowerCase().includes(e.target.value.toLowerCase());
         });
+        setCurrentPage(1);
         setFilteredCourses(filtered);
     };
 
