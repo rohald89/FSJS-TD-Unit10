@@ -20,7 +20,6 @@ export default class Data {
 
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
     }
-    console.log(credentials);
     return fetch(url, options);
   }
 
@@ -59,6 +58,8 @@ export default class Data {
     const path = `/courses/`
     const response = await this.api(path, 'GET');
     if(response.status === 200) {
+      return response.json();
+    } else if (response.status === 500) {
       return response.json();
     }
   }

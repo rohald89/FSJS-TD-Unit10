@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 import Pagination from './Pagination';
@@ -10,14 +11,19 @@ function Courses(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(localStorage.getItem('perPage') || 3);
     const { context } = props;
+    const history = useHistory();
 
     // get all courses and store them in the courses and filteredCourses variables
     useEffect(() => {
         setLoading(true);
         context.data.getCourses()
             .then(data => {
-                setCourses(data.courses);
-                setFilteredCourses(data.courses);
+                if(data.error) {
+                    history.push('/error');
+                } else {
+                    setCourses(data.courses);
+                    setFilteredCourses(data.courses);
+                }
             })
             .catch(err => console.log(err));
         setLoading(false);
