@@ -10,7 +10,6 @@ const ActionBarWithContext = withContext(ActionBar);
 function CourseDetail(props) {
     const { id } = props.match.params;
     const { context } = props;
-    const user = context.authenticatedUser;
     const history = useHistory();
     const [ course, setCourse ] = useState({
         id: '',
@@ -45,13 +44,8 @@ function CourseDetail(props) {
 
     return (
         <>
-            {
-                // make sure authenticated user is the owner of this course
-                // if it is show the action bar
-                user && user.id === course.user.id ? 
-                <ActionBarWithContext id={course.id} />
-                : ''
-            }
+
+                <ActionBarWithContext course={course} />
             
             <div className="wrap course--detail">
                 <h2>Course Detail</h2>

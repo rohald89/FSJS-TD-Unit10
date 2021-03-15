@@ -5,20 +5,27 @@ import {createBrowserHistory} from 'history';
 function ActionsBar(props) {
     // force rerender of the courses after deleting one
     const history = createBrowserHistory({forceRefresh:true})
-    const { id, context } = props;
-    const { emailAddress, password } = context.authenticatedUser;
+    const { course, context } = props;
+    const { id: authId, emailAddress, password } = context.authenticatedUser;
 
     const handleDelete = (e) => {
         e.preventDefault();
-        context.data.deleteCourse(id, emailAddress, password);
+        context.data.deleteCourse(course.id, emailAddress, password);
         history.push('/');
     };
 
     return (
         <div className="actions--bar">
             <div className="wrap">
-                <Link to={`/courses/${id}/update`} className="button">Update Course</Link>
-                <Link to="/" className="button" onClick={handleDelete}>Delete Course</Link>
+                { 
+                    // hide update and delete button when the logged in user is not the owner of the course
+                    authId && authId === course.user.id ? 
+                        <>
+                            <Link to={`/courses/${course.id}/update`} className="button">Update Course</Link>
+                            <Link to="/" className="button" onClick={handleDelete}>Delete Course</Link>
+                        </>
+                    : ''
+                }
                 <Link to="/" className="button button-secondary">Return to List</Link>
             </div>
         </div>
