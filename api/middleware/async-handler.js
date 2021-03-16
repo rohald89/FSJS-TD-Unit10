@@ -12,7 +12,7 @@ exports.asyncHandler = (cb) => {
           next(error); 
         } else {
           // Forward error to the global error handler
-          next(error);
+          next(err);
         }
     }
   }
