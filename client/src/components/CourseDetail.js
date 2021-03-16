@@ -31,6 +31,8 @@ function CourseDetail(props) {
         .then(data => {
             if(data === null) {
                 history.push('/notfound');
+            } else if(data.error) {
+                history.push('/error');
             } else {
                 setCourse(data);
             }

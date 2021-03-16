@@ -24,7 +24,8 @@ p {
   hyphens: auto;
 }
 a {
-  color: #939;
+  color: white;
+  font-weight: bold;
   text-decoration: none;
 }
 .wrap {
@@ -300,7 +301,6 @@ textarea {
 }
 .button:last-child {
   margin-bottom: 0;
-  margin-left: 1rem;
 }
 .button:hover {
   background: linear-gradient( 131.29deg, rgba(255, 255, 255, 0) -1.83%, rgba(255, 255, 255, 0.21) 109.95% );

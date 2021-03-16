@@ -72,6 +72,8 @@ export default class Data {
       return response.json().then(data => data.course);
     } else if (response.status === 404) {
       return null;
+    } else if (response.status === 500) {
+      return response.json();
     }
   }
 
